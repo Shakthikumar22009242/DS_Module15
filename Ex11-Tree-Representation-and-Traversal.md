@@ -1,88 +1,49 @@
-# EXERCISE 11: Tree Representation and Traversal – Postorder Traversal
-
-## DATE:
-17-03-2025
-
+# Ex11 Convert HashSet to ArrayList in Java
+## DATE: 06-10-25
 ## AIM:
-To write a C function to perform post order traversal of a binary tree.
+To convert a collection of distinct integers stored in a HashSet into an ArrayList and display its contents.
+## Algorithm
+1.Start the program.
 
----
+2.Create a HashSet to store a collection of distinct integers.
 
-## Algorithm:
-1. Define a structure for the binary tree node.
-2. Create a binary tree manually or using dynamic memory allocation.
-3. Implement the `postorder` traversal function:
-   - If the node is not NULL:
-     - Recursively call `postorder(left subtree)`
-     - Recursively call `postorder(right subtree)`
-     - Process the current node (print its value)
-4. Call the postorder function with the root node.
-5. End.
+3.Add a few integers to the HashSet.
 
----
+4.Create an ArrayList and initialize it with the elements of the HashSet.
+
+5.Display the elements of both HashSet and ArrayList and End the program.
 
 ## Program:
-```c
+```
 /*
-Program to perform post order traversal of a binary tree.
+Program to To convert a collection of distinct integers stored in a HashSet into an ArrayList and display its contents.
 Developed by: SHAKTHI KUMAR S
-RegisterNumber: 212222110043
+RegisterNumber:  212222110043
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+import java.util.*;
 
-// Define a structure for tree node
-struct Node {
-    int data;
-    struct Node* left;
-    struct Node* right;
-};
+public class HashSetToArrayList {
+    public static void main(String[] args) {
+        HashSet<Integer> set = new HashSet<>();
+        set.add(10);
+        set.add(20);
+        set.add(30);
+        set.add(40);
+        set.add(50);
 
-// Function to create a new node
-struct Node* createNode(int value) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->left = newNode->right = NULL;
-    return newNode;
-}
+        System.out.println("HashSet: " + set);
 
-// Function for postorder traversal
-void postorder(struct Node* root) {
-    if (root == NULL)
-        return;
-    postorder(root->left);
-    postorder(root->right);
-    printf("%d ", root->data);
-}
-
-int main() {
-    // Creating a simple binary tree
-    /*
-            1
-           / \
-          2   3
-         / \
-        4   5
-    */
-    struct Node* root = createNode(1);
-    root->left = createNode(2);
-    root->right = createNode(3);
-    root->left->left = createNode(4);
-    root->left->right = createNode(5);
-
-    printf("Postorder traversal of the binary tree: ");
-    postorder(root);
-    printf("\n");
-
-    return 0;
+        ArrayList<Integer> list = new ArrayList<>(set);
+        System.out.println("ArrayList: " + list);
+    }
 }
 ```
 
 ## Output:
-![image](https://github.com/user-attachments/assets/3edaf7b6-2631-4115-bbd8-6d7139efa9b4)
 
+<img width="611" height="748" alt="514719400-446bb67e-e7e2-4c79-a139-aafbccb144b9" src="https://github.com/user-attachments/assets/12b4abc6-21b0-4caf-87c2-aad3d89f51b9" />
 
 
 ## Result:
-Thus, the function to perform post order traversal of a binary tree is implemented successfully
+The program successfully converts a collection of distinct integers stored in a HashSet into an ArrayList
