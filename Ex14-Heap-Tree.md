@@ -1,142 +1,72 @@
-# EXERCISE 14: Heap Tree – Deletion
-
-## DATE:
-21-03-2025
-
+# Ex14 Tracking the First Unique Number in a Stream using LinkedHashMap
+## DATE: 06-10-25
 ## AIM:
-To write a C function to delete an element in a Heap Tree.
+To implement a program that tracks the first unique (non-repeating) number in a stream of integers using a LinkedHashMap.
 
----
-
-## Algorithm:
+## Algorithm
 1. Start the program.
-2. Define a structure for the heap tree.
-3. Create a function to delete the root element from the heap:
-   - Replace the root with the last element.
-   - Decrease the heap size.
-   - Apply the heapify process to restore the heap property (Max Heap or Min Heap).
-4. In the `main()` function:
-   - Insert elements into the heap.
-   - Display the heap before and after deletion.
-5. End.
 
----
+2. Create a LinkedHashMap to store numbers and their frequency counts.
+
+3. For each incoming number in the stream:
+
+4. Increment its count in the map.
+
+5. Iterate through the map to find the first number with a count of 1.
+
+6. Display the first unique number.
+
+7. Stop the program. 
 
 ## Program:
-```c
+```
 /*
-Program to delete an element in a Heap Tree
+Program to tracks the first unique (non-repeating) number in a stream of integers using a LinkedHashMap.
 Developed by: SHAKTHI KUMAR S
-RegisterNumber: 212222110043
+RegisterNumber:  212222110043
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+import java.util.*;
 
-// Define a structure for the heap tree
-struct Heap {
-    int* arr;
-    int size;
-    int capacity;
-};
+public class FirstUniqueNumberStream {
 
-// Function to swap two elements
-void swap(int* x, int* y) {
-    int temp = *x;
-    *x = *y;
-    *y = temp;
-}
-
-// Heapify function to maintain the heap property
-void heapify(struct Heap* h, int i) {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
-
-    if (left < h->size && h->arr[left] > h->arr[largest])
-        largest = left;
-    if (right < h->size && h->arr[right] > h->arr[largest])
-        largest = right;
-
-    if (largest != i) {
-        swap(&h->arr[i], &h->arr[largest]);
-        heapify(h, largest);
-    }
-}
-
-// Function to delete an element (the root) from the heap
-void deleteElement(struct Heap* h) {
-    if (h->size == 0) {
-        printf("Heap is empty\n");
-        return;
+    public static void processStream(int n, Scanner sc) {
+        LinkedHashMap<Integer, Integer> freqMap = new LinkedHashMap<>();
+        for(int i=0; i<n; i++){
+            int current = sc.nextInt();
+            
+            freqMap.put(current, freqMap.getOrDefault(current, 0)+1);
+            
+            int fUniq = -1;
+            
+            for(Map.Entry<Integer, Integer> entry : freqMap.entrySet()){
+                if(entry.getValue() == 1){
+                    fUniq = entry.getKey();
+                    break;
+                }
+            }
+            
+            if(fUniq != -1){
+                System.out.println("First unique number: "+fUniq);
+            }else{
+                System.out.println("No unique number");
+            }
+        }
     }
 
-    // Replace the root with the last element
-    h->arr[0] = h->arr[h->size - 1];
-    h->size--;
-
-    // Restore the heap property
-    heapify(h, 0);
-}
-
-// Function to insert an element into the heap
-void insert(struct Heap* h, int key) {
-    if (h->size == h->capacity) {
-        printf("Heap is full\n");
-        return;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        processStream(n, sc);
+        sc.close();
     }
-
-    // Insert the new element at the end
-    h->size++;
-    h->arr[h->size - 1] = key;
-
-    // Fix the heap property if it is violated
-    for (int i = h->size / 2 - 1; i >= 0; i--)
-        heapify(h, i);
-}
-
-// Function to display the heap
-void display(struct Heap* h) {
-    for (int i = 0; i < h->size; i++) {
-        printf("%d ", h->arr[i]);
-    }
-    printf("\n");
-}
-
-int main() {
-    // Create a heap with a maximum capacity of 10 elements
-    struct Heap h;
-    h.capacity = 10;
-    h.size = 0;
-    h.arr = (int*)malloc(h.capacity * sizeof(int));
-
-    // Insert elements into the heap
-    insert(&h, 10);
-    insert(&h, 20);
-    insert(&h, 30);
-    insert(&h, 40);
-    insert(&h, 50);
-    insert(&h, 60);
-    
-    printf("Heap before deletion: ");
-    display(&h);
-
-    // Delete the root element (largest element in max heap)
-    deleteElement(&h);
-
-    printf("Heap after deletion: ");
-    display(&h);
-
-    free(h.arr);
-    return 0;
 }
 ```
 
 ## Output:
 
-![image](https://github.com/user-attachments/assets/9540cbe5-974e-4afd-8dfb-05cf3f0f7142)
-
+<img width="860" height="719" alt="514892746-419d5d2f-f551-409c-be4c-d1225fdba393" src="https://github.com/user-attachments/assets/5acd9373-f22d-4282-9f3e-134c221efc79" />
 
 
 ## Result:
-Thus, the function to delete an element in a Heap Tree is implemented successfully.
+The program successfully tracks and returns the first unique number at any point in the integer stream using a LinkedHashMap.
