@@ -1,95 +1,65 @@
-# EXERCISE 12: Binary Search Tree – Insertion
-
-## DATE:
-18-03-2025
-
+# Ex12 Add Elements from an Array into a TreeSet
+## DATE: 06-10-25
 ## AIM:
-To write a C function to insert the elements in the binary search tree.
+To write a Java program that adds elements from an array into a TreeSet and displays the elements in sorted order.
+## Algorithm
+1.Start the program.
 
----
+2.Initialize an array with integer elements.
 
-## Algorithm:
-1. Define a structure for the binary search tree node.
-2. Create a function to allocate memory and initialize a new node.
-3. Create a function to insert an element into the binary search tree:
-   - If the tree is empty, create a new node and return it.
-   - If the data is less than the root’s data, insert it into the left subtree.
-   - If the data is greater than the root’s data, insert it into the right subtree.
-4. In the `main()` function, insert multiple elements by calling the insert function.
-5. Optionally display the tree using inorder traversal to verify insertion.
-6. End.
+3.Create an empty TreeSet.
 
----
+4.Add all elements from the array into the TreeSet.
+
+5.Display the elements of the TreeSet (which are automatically sorted).
+
+6.Stop the program.  
 
 ## Program:
-```c
+```
 /*
-Program to insert the elements in the binary search tree
+Program that adds elements from an array into a TreeSet and displays the elements in sorted order.
 Developed by: SHAKTHI KUMAR S
-RegisterNumber: 212222110043
+RegisterNumber:  212222110043
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+import java.util.*;
 
-// Define the structure for a node in BST
-struct Node {
-    int data;
-    struct Node* left;
-    struct Node* right;
-};
+public class ArrayToTreeSet {
 
-// Function to create a new node
-struct Node* createNode(int value) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->left = newNode->right = NULL;
-    return newNode;
-}
-
-// Function to insert a node into BST
-struct Node* insert(struct Node* root, int value) {
-    if (root == NULL)
-        return createNode(value);
-    
-    if (value < root->data)
-        root->left = insert(root->left, value);
-    else if (value > root->data)
-        root->right = insert(root->right, value);
-    
-    return root;
-}
-
-// Function for inorder traversal
-void inorder(struct Node* root) {
-    if (root != NULL) {
-        inorder(root->left);
-        printf("%d ", root->data);
-        inorder(root->right);
-    }
-}
-
-int main() {
-    struct Node* root = NULL;
-    int elements[] = {50, 30, 20, 40, 70, 60, 80};
-    int n = sizeof(elements) / sizeof(elements[0]);
-
-    for (int i = 0; i < n; i++) {
-        root = insert(root, elements[i]);
+    public static TreeSet<Integer> convertArrayToTreeSet(int[] arr) {
+        List<Integer> list = new ArrayList<>();
+        for(int x : arr){
+            list.add(x);
+        }
+        
+        TreeSet<Integer> treeSet = new TreeSet<>(list);
+        return treeSet;
     }
 
-    printf("Inorder traversal of the BST after insertion: ");
-    inorder(root);
-    printf("\n");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
 
-    return 0;
+        TreeSet<Integer> treeSet = convertArrayToTreeSet(arr);
+        System.out.println("Elements in TreeSet:");
+        for (int num : treeSet) {
+            System.out.println(num);
+        }
+
+        sc.close();
+    }
 }
 ```
 
 ## Output:
+<img width="728" height="633" alt="514720326-22497514-1f81-4585-8cbf-b9b4ddd279ad" src="https://github.com/user-attachments/assets/8aa9b5c2-98af-4ee6-8ec8-1c863000790a" />
 
-![image](https://github.com/user-attachments/assets/d2d63130-f2fe-4124-a215-857d10f7d995)
 
 
 ## Result:
-Thus, the C function to insert the elements in the binary search tree is implemented successfully.
+The program successfully adds elements from an array into a TreeSet.
